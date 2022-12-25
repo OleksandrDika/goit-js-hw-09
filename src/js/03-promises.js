@@ -6,12 +6,13 @@ const btnSub = document.querySelector('button[type=submit]')
 form.addEventListener('input', onInput)
 btnSub.addEventListener('click', onSubmit)
 
-function onInput(even) {
+let result = {};
+function onInput(even) {  
   const firstDelay = form.delay.value;
   const delayStep = form.step.value;
   const amount = form.amount.value;  
   return result = {firstDelay, delayStep, amount}  
-}
+};
 
 function onSubmit(even) {
   btnSub.setAttribute('type', 'button'); 

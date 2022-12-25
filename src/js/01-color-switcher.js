@@ -6,13 +6,15 @@ btnStart.addEventListener("click", getRandomHexColor);
 btnStop.addEventListener("click", onStop);
 
 btnStop.setAttribute('disabled', true) 
-
+let timerId = 0;
 function getRandomHexColor() {
     timerId = setInterval(() => {
         return document.body.style.backgroundColor =  `#${Math.floor(Math.random() * 16777215).toString(16)}`;;
       }, 1000);  
       btnStart.setAttribute('disabled', true)  
-      btnStop.removeAttribute('disabled')        
+      btnStop.removeAttribute('disabled') 
+      console.log(timerId) 
+      return timerId;      
 };
 
 function onStop (even) {
