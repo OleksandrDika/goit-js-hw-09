@@ -5,22 +5,24 @@ import "flatpickr/dist/flatpickr.min.css";
 import Notiflix from 'notiflix';
 
 const options = {
-    enableTime: true,
+    enableTime: true,    
     time_24hr: true,
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-      console.log(selectedDates[0]);
+      chekingDate(selectedDates);
     },
 };
 
-flatpickr("#datetime-picker", {options});
+
 
 const input = document.querySelector('#datetime-picker');
 const btn = document.querySelector('button[data-start]');
 
 input.addEventListener('input', onInputDate);
 btn.addEventListener('click', onclick);
+
+const fp = flatpickr(input, options);
 
 btn.setAttribute('disabled', true) 
 
@@ -33,17 +35,20 @@ const timer = {
   start(){
     if (this.isActive) {
       return
-    }
-    // const startTime = Date.now();
+    }    
     this.isActive = true;
 
-    setInterval(() => {
+   let intId = setInterval(() => {
       const startTime = Date.now();
       const currentTime = new Date(input.value);
       const rrr = currentTime -startTime;
+      if (rrr <= 0 ) {
+        return clearInterval(intId)
+      }
       const {days, hours, mins, secs} = getTimeComponents(rrr)
       updateTimer({days, hours, mins, secs})
-      console.log(`${days}:${hours}:${mins}:${secs}`)
+      console.log(`${days}:${hours}:${mins}:${secs}`)     
+      
     }, 1000);
   }
 }
@@ -82,6 +87,7 @@ function updateTimer ({days, hours, mins, secs}) {
   textHours.textContent = `${hours}`;
   textMinutes.textContent = `${mins}`;
   textSeconds.textContent = `${secs}`;
+  
 }
 
 
