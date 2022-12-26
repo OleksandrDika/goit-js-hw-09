@@ -10,7 +10,7 @@ const options = {
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-      chekingDate(selectedDates);
+      console.log(selectedDates[0]);
     },
 };
 
